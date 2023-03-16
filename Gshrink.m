@@ -1,9 +1,10 @@
 function [x,objV] = Gshrink(x,rho,sX, isWeight,mode)
 
 if isWeight == 1
-%     C = 2*sqrt(2)*sqrt(sX(3)*sX(2));
+    %     C = 2*sqrt(2)*sqrt(sX(3)*sX(2));
     C = sqrt(sX(3)*sX(2));
 end
+
 if ~exist('mode','var')
 
     mode = 1;
@@ -17,7 +18,6 @@ elseif mode == 3
 else
     Y = X;
 end
-% 
 
 Yhat = fft(Y,[],3);
 % weight = C./sTrueV+eps;
@@ -32,22 +32,16 @@ else
     n3 = sX(3);
 end
 
-
-
-    for i = 1:n3
-        [uhat,shat,vhat] = svd(full(Yhat(:,:,i)),'econ');
-        
-            tau = rho;
-            shat = max(shat - tau,0);
-               
-        
-        objV = objV + sum(shat(:));
-        Yhat(:,:,i) = uhat*shat*vhat';
-
-    end
-  
+for i = 1:n3
+    [uhat,shat,vhat] = svd(full(Yhat(:,:,i)),'econ');
+    tau = rho;
+    shat = max(shat - tau,0);
+    objV = objV + sum(shat(:));
+    Yhat(:,:,i) = uhat*shat*vhat';
+end
 
 Y = ifft(Yhat,[],3);
+
 if mode == 1
     X = Yi2X(Y,3);
 elseif mode == 3
@@ -59,4 +53,3 @@ end
 x = X(:);
 
 end
- 
