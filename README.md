@@ -1,5 +1,5 @@
 <h1 align="center">
-    Multi-view semi-supervised feature selection with soft label learning and tensor low-rank approximation
+    Multi-view Semi-supervised Feature Selection with Soft Label Learning and Tensor Low-rank Approximation
 
 ![License](https://img.shields.io/badge/license-MIT-yellow) ![Language](https://img.shields.io/badge/language-matlab-brightgreen)
 
